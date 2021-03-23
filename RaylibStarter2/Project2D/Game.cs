@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Raylib;
 using static Raylib.Raylib;
+using MathLibrary;
 
 namespace Project2D
 {
@@ -21,8 +22,7 @@ namespace Project2D
 
         private float deltaTime = 0.005f;
 
-        Image logo;
-        Texture2D texture;
+		private Level m_Level = null;
 
         public Game()
         {
@@ -39,8 +39,7 @@ namespace Project2D
             }
 
 			//Initialize objects here
-            logo = LoadImage("../Images/aie-logo-dark.jpg");
-            texture = LoadTextureFromImage(logo);
+			m_Level = new Level();
 		}
 
         public void Shutdown()
@@ -61,10 +60,14 @@ namespace Project2D
             }
             frames++;
 
-			//Update game objects here          
+			//Update game objects here      
+			m_Level.Update(deltaTime);
+			m_Level.UpdateTransforms();
+			
+			CollisionManager.CheckCollision();
 		}
 
-        public void Draw()
+		public void Draw()
         {
             BeginDrawing();
 
@@ -73,10 +76,9 @@ namespace Project2D
 			//Draw game objects here
             DrawText(fps.ToString(), 10, 10, 14, RLColor.RED);
 
-			DrawTexture(texture, GetScreenWidth() / 2 - texture.width / 2, GetScreenHeight() / 2 - texture.height / 2, RLColor.WHITE);
+			m_Level.Draw();
 
 			EndDrawing();
         }
-
     }
 }

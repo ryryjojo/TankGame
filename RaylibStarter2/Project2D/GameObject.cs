@@ -21,15 +21,38 @@ namespace Project2D
 		protected Image m_Image;
 		protected Texture2D m_Texture;
 
+		protected float m_fRadius = 0.0f;
+		protected float m_fSpeed = 100.0f;
+
 		public GameObject(string fileName)
 		{
+			m_LocalTransform = new Matrix3(true);
+			m_GlobalTransform = new Matrix3(true);
 			m_Image = LoadImage(fileName);
 			m_Texture = LoadTextureFromImage(m_Image);
+
+			CollisionManager.AddObject(this);
+		}
+
+		public void SetParent(GameObject parent)
+		{
+			if (m_Parent != null)
+				m_Parent.m_Children.Remove(this);
+
+			m_Parent = parent;
+
+			if (m_Parent != null)
+				m_Parent.m_Children.Add(this);
 		}
 
 		public virtual void Update(float fDeltaTime)
 		{
 
+
+			foreach (GameObject child in m_Children)
+			{
+				child.Update(fDeltaTime);
+			}
 		}
 
 		public void UpdateTransforms()
@@ -48,6 +71,21 @@ namespace Project2D
 		public void Draw()
 		{
 			Renderer.DrawTexture(m_Texture, m_GlobalTransform, RLColor.WHITE.ToColor());
+
+			foreach (GameObject child in m_Children)
+			{
+				child.Draw();
+			}
+		}
+
+		public float GetRadius()
+		{
+			return m_fRadius;
+		}
+
+		public virtual void OnCollision()
+		{
+
 		}
 	}
 }
