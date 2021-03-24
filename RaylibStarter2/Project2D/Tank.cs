@@ -58,6 +58,20 @@ namespace Project2D
 
 			base.Update(fDeltaTime);
 		}
+
+		public override void OnCollision(GameObject otherObj)
+		{
+			m_LocalTransform.m7 = m_v2PrevPosition.x;
+			m_LocalTransform.m8 = m_v2PrevPosition.y;
+
+			//Vector2 reflection = -2.0f * m_v2Velocity.Dot(Vector2Normalize) * v2Normal + m_v2Velocity;
+			Vector2 v2Normal = otherObj.GetPosition() - GetPosition();
+			v2Normal.Normalise();
+
+			Vector2 reflection = -2.0f * m_v2Velocity.Dot(v2Normal) * v2Normal + m_v2Velocity;
+
+			m_v2Velocity = reflection;
+		}
 	}
 }
 //m_LocalTransform.m8 -= 100.0f * fDeltaTime;

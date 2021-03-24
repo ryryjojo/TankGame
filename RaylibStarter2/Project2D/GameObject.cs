@@ -22,7 +22,10 @@ namespace Project2D
 		protected Texture2D m_Texture;
 
 		protected float m_fRadius = 0.0f;
+		protected Vector2 m_v2PrevPosition;
 		protected float m_fSpeed = 100.0f;
+
+
 
 		public GameObject(string fileName)
 		{
@@ -53,6 +56,8 @@ namespace Project2D
 			{
 				child.Update(fDeltaTime);
 			}
+
+			m_v2PrevPosition = GetPosition() - m_Parent.GetPosition();
 		}
 
 		public void UpdateTransforms()
@@ -83,9 +88,13 @@ namespace Project2D
 			return m_fRadius;
 		}
 
-		public virtual void OnCollision()
+		public virtual void OnCollision(GameObject otherObj)
 		{
+		}
 
+		public Vector2 GetPosition()
+		{
+			return new Vector2(m_GlobalTransform.m7, m_GlobalTransform.m8);
 		}
 	}
 }
