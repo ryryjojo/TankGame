@@ -57,6 +57,7 @@
     <Compile Include="Renderer.cs" />
     <Compile Include="Tank.cs" />
     <Compile Include="Turret.cs" />
+    <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

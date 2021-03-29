@@ -21,7 +21,11 @@ namespace Project2D
 		protected Image m_Image;
 		protected Texture2D m_Texture;
 
-		protected float m_fRadius = 0.0f;
+		public Vector2 m_Min;
+		public Vector2 m_Max;
+
+		public bool m_collision = true;
+
 		protected Vector2 m_v2PrevPosition;
 		protected float m_fSpeed = 100.0f;
 
@@ -55,13 +59,16 @@ namespace Project2D
 			foreach (GameObject child in m_Children)
 			{
 				child.Update(fDeltaTime);
-			}
-
-			m_v2PrevPosition = GetPosition() - m_Parent.GetPosition();
+			}	
 		}
 
 		public void UpdateTransforms()
 		{
+			if (m_Parent != null)
+				m_v2PrevPosition = GetPosition() + m_Parent.GetPosition();
+			else
+				m_v2PrevPosition = GetPosition();
+
 			if (m_Parent != null)
 				m_GlobalTransform = m_Parent.m_GlobalTransform * m_LocalTransform;
 			else
@@ -83,11 +90,6 @@ namespace Project2D
 			}
 		}
 
-		public float GetRadius()
-		{
-			return m_fRadius;
-		}
-
 		public virtual void OnCollision(GameObject otherObj)
 		{
 		}
@@ -95,6 +97,16 @@ namespace Project2D
 		public Vector2 GetPosition()
 		{
 			return new Vector2(m_GlobalTransform.m7, m_GlobalTransform.m8);
+		}
+
+		public Vector2 GetMin()
+		{
+			return m_Min;
+		}
+
+		public Vector2 GetMax()
+		{
+			return m_Max;
 		}
 	}
 }

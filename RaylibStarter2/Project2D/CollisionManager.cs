@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Raylib;
+using static Raylib.Raylib;
+using MathLibrary;
 
 namespace Project2D
 {
@@ -23,16 +26,21 @@ namespace Project2D
 				{
 					if (obj1 == obj2)
 						continue;
+
+					if (obj1.m_collision == false || obj2.m_collision == false)
+						continue;
+
+					Vector2 obj1Min = obj1.GetMin() + obj1.GetPosition();
+					Vector2 obj1Max = obj1.GetMax() + obj1.GetPosition();
+					Vector2 obj2Min = obj2.GetMin() + obj2.GetPosition();
+					Vector2 obj2Max = obj2.GetMax() + obj2.GetPosition();
+
+					if ((obj2Max.x >= obj1Min.x) && (obj2Max.y >= obj1Min.y) && (obj2Min.x <= obj1Max.x) && (obj2Min.y <= obj1Max.y))
+					{
+						obj1.OnCollision(obj2);
+					}
 				}
 			}
-
-			//Vector2 object1Min;
-			//Vector2 object1Max;
-
-			//Vector2 object2Min;
-			//Vector2 object2Max;
-
-			//if (object1Max.x > object2Min.x && object2Max < object1Min &&
 		}
 	}
 }

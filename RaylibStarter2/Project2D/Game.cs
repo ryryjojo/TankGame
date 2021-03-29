@@ -71,7 +71,7 @@ namespace Project2D
         {
             BeginDrawing();
 
-            ClearBackground(RLColor.WHITE);
+            ClearBackground(RLColor.SKYBLUE);
 
 			//Draw game objects here
             DrawText(fps.ToString(), 10, 10, 14, RLColor.RED);
