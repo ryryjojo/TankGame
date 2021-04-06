@@ -10,8 +10,8 @@ namespace Project2D
 	{
 		public Wall(string fileName) : base(fileName)
 		{
-			m_LocalTransform.m7 = 560;
-			m_LocalTransform.m8 = 250;
+			m_LocalTransform.m7 = 960;
+			m_LocalTransform.m8 = 540;
 
 			m_Min.x = -74;
 			m_Min.y = -74;

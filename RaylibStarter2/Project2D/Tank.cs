@@ -53,6 +53,22 @@ namespace Project2D
 			{
 				fRotation += 2.0f * fDeltaTime;
 			}
+			if (IsKeyDown(KeyboardKey.KEY_UP))
+			{
+				m_v2Velocity.y -= m_fSpeed * fDeltaTime;
+			}
+			if (IsKeyDown(KeyboardKey.KEY_DOWN))
+			{
+				m_v2Velocity.y += m_fSpeed * fDeltaTime;
+			}
+			if (IsKeyDown(KeyboardKey.KEY_LEFT))
+			{
+				fRotation -= 2.0f * fDeltaTime;
+			}
+			if (IsKeyDown(KeyboardKey.KEY_RIGHT))
+			{
+				fRotation += 2.0f * fDeltaTime;
+			}
 
 			Matrix3 translation = new Matrix3(true);
 			translation.m8 = m_v2Velocity.y * fDeltaTime;
