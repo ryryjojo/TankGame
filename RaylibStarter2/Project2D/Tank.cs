@@ -17,12 +17,15 @@ namespace Project2D
 
 		public Tank(string fileName) : base(fileName)
 		{
+			//create turret as child
 			m_Turret = new Turret("../Images/Turret (1).png");
 			m_Turret.SetParent(this);
 
+			//set location of tank
 			m_LocalTransform.m7 = 100;
 			m_LocalTransform.m8 = 250;
 
+			//set bounding box of tank
 			m_Min.x = -94;
 			m_Min.y = -111;
 
@@ -37,6 +40,7 @@ namespace Project2D
 		{
 			float fRotation = 0.0f;
 
+			//move when KEY_[x] is pressed
 			if(IsKeyDown(KeyboardKey.KEY_W))
 			{
 				m_v2Velocity.y -= m_fSpeed * fDeltaTime;
@@ -81,24 +85,13 @@ namespace Project2D
 			base.Update(fDeltaTime);
 		}
 
+		//move back to a safe position on collision
 		public override void OnCollision(GameObject otherObj)
 		{
 			m_LocalTransform.m7 = m_v2PrevPosition.x;
 			m_LocalTransform.m8 = m_v2PrevPosition.y;
 			m_v2Velocity.x = 0;
 			m_v2Velocity.y = 0;
-
-
-			//Vector2 reflection = -2.0f * m_v2Velocity.Dot(Vector2Normalize) * v2Normal + m_v2Velocity;
-			//Vector2 v2Normal = otherObj.GetPosition() - GetPosition();
-			//v2Normal.Normalise();
-
-			//Vector2 reflection = -2.0f * m_v2Velocity.Dot(v2Normal) * v2Normal + m_v2Velocity;
-
-			//m_v2Velocity = reflection;
-
-
 		}
 	}
 }
-//m_LocalTransform.m8 -= 100.0f * fDeltaTime;

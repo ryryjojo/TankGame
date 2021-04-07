@@ -11,13 +11,13 @@ namespace Project2D
 {
 	class GameObject
 	{
+		//initialise variables
 		protected GameObject m_Parent = null;
 		protected List<GameObject> m_Children = new List<GameObject>();
 
 		protected Matrix3 m_LocalTransform;
 		protected Matrix3 m_GlobalTransform;
-		
-
+	
 		protected Image m_Image;
 		protected Texture2D m_Texture;
 
@@ -29,8 +29,7 @@ namespace Project2D
 		protected Vector2 m_v2PrevPosition;
 		protected float m_fSpeed = 100.0f;
 
-
-
+		//gameobject constructor
 		public GameObject(string fileName)
 		{
 			m_LocalTransform = new Matrix3(true);
@@ -41,6 +40,7 @@ namespace Project2D
 			CollisionManager.AddObject(this);
 		}
 
+		//parent/children code
 		public void SetParent(GameObject parent)
 		{
 			if (m_Parent != null)
@@ -52,16 +52,16 @@ namespace Project2D
 				m_Parent.m_Children.Add(this);
 		}
 
+		//updates children when parents are updated
 		public virtual void Update(float fDeltaTime)
 		{
-
-
 			foreach (GameObject child in m_Children)
 			{
 				child.Update(fDeltaTime);
 			}	
 		}
 
+		//updates childrens transforms when parents transforms are updated
 		public void UpdateTransforms()
 		{
 			if (m_Parent != null)
@@ -80,6 +80,7 @@ namespace Project2D
 			}
 		}
 
+		//draw objects
 		public void Draw()
 		{
 			Renderer.DrawTexture(m_Texture, m_GlobalTransform, RLColor.WHITE.ToColor());
@@ -90,15 +91,18 @@ namespace Project2D
 			}
 		}
 
+		//constructor (to override)
 		public virtual void OnCollision(GameObject otherObj)
 		{
 		}
 
+		//get objects position
 		public Vector2 GetPosition()
 		{
 			return new Vector2(m_GlobalTransform.m7, m_GlobalTransform.m8);
 		}
 
+		//get objects bounding box
 		public Vector2 GetMin()
 		{
 			return m_Min;

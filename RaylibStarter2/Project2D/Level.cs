@@ -11,11 +11,14 @@ namespace Project2D
 		private Tank m_Tank = null;
 		private Wall m_Wall = null;
 
+		//create the level
 		public Level() : base("")
 		{
+			//create player in level as child
 			m_Tank = new Tank("../Images/Tank Body (1).png");
 			m_Tank.SetParent(this);
 
+			//create wall in level as child
 			m_Wall = new Wall("../Images/aie-logo-dark.jpg");
 			m_Wall.SetParent(this);
 

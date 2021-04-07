@@ -13,6 +13,7 @@ namespace Project2D
 	{
 		public Turret(string fileName) : base(fileName)
 		{
+			//set location of tank
 			m_LocalTransform.m7 = 0;
 			m_LocalTransform.m8 = 50;
 
@@ -23,7 +24,7 @@ namespace Project2D
 		{
 			float fRotation = 0.0f;
 
-			
+			//rotate when KEY_[x] is pressed
 			if (IsKeyDown(KeyboardKey.KEY_Q))
 			{
 				fRotation -= 2.0f * fDeltaTime;

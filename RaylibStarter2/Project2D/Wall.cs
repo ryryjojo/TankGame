@@ -10,9 +10,11 @@ namespace Project2D
 	{
 		public Wall(string fileName) : base(fileName)
 		{
+			//set location of wall
 			m_LocalTransform.m7 = 960;
 			m_LocalTransform.m8 = 540;
 
+			//set bounding box of wall
 			m_Min.x = -74;
 			m_Min.y = -74;
 
@@ -20,6 +22,7 @@ namespace Project2D
 			m_Max.y = 74;
 		}
 
+		//update wall
 		public override void Update(float fDeltaTime)
 		{
 			base.Update(fDeltaTime);

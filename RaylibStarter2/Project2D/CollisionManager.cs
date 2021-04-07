@@ -18,6 +18,7 @@ namespace Project2D
 			m_ObjectList.Add(obj);
 		}
 
+		//check every object with collision if they are colliding
 		public static void CheckCollision()
 		{
 			foreach(GameObject obj1 in m_ObjectList)
